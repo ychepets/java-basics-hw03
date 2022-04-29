@@ -1,50 +1,67 @@
 public class Student {
-  int rating;
-  private String name;
+    private int rating;
+    private String name;
+    private static int studentsCounter;
+    private static double avgRating;
 
-  // TODO implement Student class according to the instructions provided in the README.md file
+    // TODO implement Student class according to the instructions provided in the README.md file
 
-  public Student(String name) {
-    //TODO initialize name
-  }
+    public Student() {
+    }
 
-  public static double getAvgRating() {
-    // TODO return average rating of all students
-    return 0;
-  }
+    public Student(String name) {
+        this.name = name;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public Student(int rating) {
+        this.rating = rating;
+    }
 
-  public void setName(String name) {
-    // TODO set student's name
-  }
+    public Student(String name, int rating) {
+        this.name = name;
+        this.rating = rating;
+    }
 
-  public int getRating() {
-    return rating;
-  }
+    public static double getAvgRating() {
+        return avgRating;
+    }
 
-  public void setRating(int rating) {
-    // TODO initialize rating;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public boolean betterStudent(Student student) {
-    // TODO return the result of comparing this.student's rating with the student's rating
-    return false;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public void changeRating(int rating) {
-    // TODO change this student's rating and average rating of all students
-  }
+    public int getRating() {
+        return rating;
+    }
 
-  public static void removeStudent(Student student) {
-    // TODO remove student
-  }
+    public void setRating(int rating) {
+        this.rating = rating;
+        avgRating = avgRating + (rating - avgRating)/++studentsCounter;
+    }
 
-  @Override
-  public String toString() {
-    // TODO return String with name and rating of this student
-    return "";
-  }
+    public boolean betterStudent(Student student) {
+        return this.rating > student.getRating();
+    }
+
+    public void changeRating(int rating) {
+        avgRating = (avgRating * studentsCounter - this.rating)/(studentsCounter - 1);
+        avgRating = avgRating + (rating - avgRating) / studentsCounter;
+        this.rating = rating;
+    }
+
+    public static void removeStudent(Student student) {
+        student.name = null;
+        student.rating = 0;
+        studentsCounter = 0;
+        avgRating = 0.0;
+    }
+
+    @Override
+    public String toString() {
+        return "Name is: " + name + " with the Rate: " + rating;
+    }
 }
