@@ -3,8 +3,7 @@ public class Student {
     private String name;
     private static int studentsCounter;
     private static double avgRating;
-
-    // TODO implement Student class according to the instructions provided in the README.md file
+    private static double generalRating;
 
     public Student() {
     }
@@ -23,7 +22,11 @@ public class Student {
     }
 
     public static double getAvgRating() {
-        return avgRating;
+        if (studentsCounter > 0) {
+            avgRating = generalRating / studentsCounter;
+            return avgRating;
+        } else
+            return 0.0;
     }
 
     public String getName() {
@@ -40,7 +43,8 @@ public class Student {
 
     public void setRating(int rating) {
         this.rating = rating;
-        avgRating = avgRating + (rating - avgRating)/++studentsCounter;
+        generalRating = generalRating + rating;
+        studentsCounter++;
     }
 
     public boolean betterStudent(Student student) {
@@ -48,16 +52,14 @@ public class Student {
     }
 
     public void changeRating(int rating) {
-        avgRating = (avgRating * studentsCounter - this.rating)/(studentsCounter - 1);
-        avgRating = avgRating + (rating - avgRating) / studentsCounter;
+        generalRating = generalRating - this.rating;
         this.rating = rating;
+        generalRating = generalRating + rating;
     }
 
     public static void removeStudent(Student student) {
-        student.name = null;
-        student.rating = 0;
         studentsCounter = 0;
-        avgRating = 0.0;
+        generalRating = generalRating - student.rating;
     }
 
     @Override
