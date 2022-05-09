@@ -5,20 +5,10 @@ public class Student {
     private static double avgRating;
     private static double generalRating;
 
-    public Student() {
-    }
-
     public Student(String name) {
         this.name = name;
-    }
-
-    public Student(int rating) {
-        this.rating = rating;
-    }
-
-    public Student(String name, int rating) {
-        this.name = name;
-        this.rating = rating;
+        this.rating = 0;
+        studentsCounter++;
     }
 
     public static double getAvgRating() {
@@ -44,7 +34,6 @@ public class Student {
     public void setRating(int rating) {
         this.rating = rating;
         generalRating = generalRating + rating;
-        studentsCounter++;
     }
 
     public boolean betterStudent(Student student) {
@@ -58,8 +47,8 @@ public class Student {
     }
 
     public static void removeStudent(Student student) {
-        studentsCounter = studentsCounter - 1;
         generalRating = generalRating - student.rating;
+        studentsCounter = studentsCounter - 1;
     }
 
     @Override
