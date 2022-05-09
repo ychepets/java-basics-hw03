@@ -58,7 +58,7 @@ public class Student {
     }
 
     public static void removeStudent(Student student) {
-        studentsCounter = 0;
+        studentsCounter = studentsCounter - 1;
         generalRating = generalRating - student.rating;
     }
 
